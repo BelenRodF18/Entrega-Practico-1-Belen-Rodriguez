@@ -1,0 +1,51 @@
+.bg-admin {
+    background-color: #f1f4f8;
+}
+
+.topbar-admin {
+    background-color: #1a202c;
+}
+
+.sidebar-admin {
+    background-color: #2d3748;
+}
+
+@media (min-width: 992px) {
+    .sidebar-admin {
+        background-color: #2d3748 !important;
+        width: 240px;
+        min-height: calc(100vh - 56px);
+        flex-shrink: 0;
+    }
+}
+
+.link-admin {
+    color: #cbd5e0;
+    border-radius: 8px;
+}
+
+.link-admin:hover,
+.link-admin.active {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.link-admin.disabled {
+    color: #718096;
+}
+
+.contenido-admin {
+    min-width: 0;
+}
+
+.tarjeta-resumen {
+    border-left: 4px solid #2b6cb0 !important;
+    border-radius: 12px;
+}
+
+.miniatura-articulo {
+    width: 40px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 4px;
+}

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiblioDigital - Administración</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/estilos.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer src="../../js/api.js"></script>
+    <script defer src="../../js/pages/admin/dashboard.js"></script>
+</head>
+<body class="bg-admin">
+
+    <div id="verificando" class="d-flex justify-content-center align-items-center vh-100">
+        <div class="spinner-border text-secondary" role="status"></div>
+    </div>
+
+    <div id="panel-admin" class="d-none">
+
+        <header>
+            <nav class="navbar navbar-dark topbar-admin sticky-top">
+                <div class="container-fluid px-3 px-lg-4">
+                    <button class="navbar-toggler d-lg-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuAdmin" aria-controls="menuAdmin">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <span class="navbar-brand fw-bold mb-0">Biblio<span class="text-info">Digital</span> <span class="badge bg-info text-dark ms-1 align-middle small">Admin</span></span>
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="text-white-50 small d-none d-sm-inline">Conectado como</span>
+                        <span id="nombre-usuario" class="text-white small fw-medium"></span>
+                        <button type="button" id="btn-logout" class="btn btn-outline-light btn-sm">Cerrar sesión</button>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <div class="d-flex">
+
+            <aside class="offcanvas-lg offcanvas-start sidebar-admin" tabindex="-1" id="menuAdmin" aria-labelledby="menuAdminLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title text-white" id="menuAdminLabel">Menú</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" data-bs-target="#menuAdmin"></button>
+                </div>
+                <div class="offcanvas-body d-flex flex-column p-3">
+                    <p class="text-uppercase text-white-50 small fw-semibold mb-2 px-2">Panel</p>
+                    <ul class="nav flex-column gap-1">
+                        <li class="nav-item"><a class="nav-link link-admin active" href="#resumen">Resumen</a></li>
+                        <li class="nav-item"><a class="nav-link link-admin" href="#articulos">Artículos</a></li>
+                        <li class="nav-item"><span class="nav-link link-admin disabled">Usuarios <small>(próximamente)</small></span></li>
+                    </ul>
+                    <p class="text-uppercase text-white-50 small fw-semibold mt-4 mb-2 px-2">Sitio</p>
+                    <ul class="nav flex-column gap-1">
+                        <li class="nav-item"><a class="nav-link link-admin" href="../../../index.html">Ver landing pública</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <main class="flex-grow-1 p-3 p-lg-4 contenido-admin">
+
+                <section id="resumen" class="mb-5">
+                    <h1 class="h3 fw-bold text-dark mb-1">Hola, <span id="saludo-nombre"></span></h1>
+                    <p class="text-muted mb-4">Este es el panel de administración de la biblioteca.</p>
+
+                    <div class="row g-3 row-cols-1 row-cols-sm-2 row-cols-xl-4">
+                        <div class="col">
+                            <div class="card border-0 shadow-sm tarjeta-resumen">
+                                <div class="card-body">
+                                    <p class="text-muted small mb-1">Artículos en catálogo</p>
+                                    <p id="total-articulos" class="h3 fw-bold mb-0">-</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card border-0 shadow-sm tarjeta-resumen">
+                                <div class="card-body">
+                                    <p class="text-muted small mb-1">Artículos disponibles</p>
+                                    <p id="total-disponibles" class="h3 fw-bold mb-0">-</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card border-0 shadow-sm tarjeta-resumen">
+                                <div class="card-body">
+                                    <p class="text-muted small mb-1">Usuarios registrados</p>
+                                    <p id="total-usuarios" class="h3 fw-bold mb-0">-</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card border-0 shadow-sm tarjeta-resumen">
+                                <div class="card-body">
+                                    <p class="text-muted small mb-1">Administradores</p>
+                                    <p id="total-admins" class="h3 fw-bold mb-0">-</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="articulos">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+                        <div>
+                            <h2 class="h4 fw-bold text-dark mb-1">Artículos de la biblioteca</h2>
+                            <p class="text-muted small mb-0">Libros, revistas y audiolibros guardados en la base de datos.</p>
+                        </div>
+                        <button type="button" class="btn btn-primary" disabled title="Se habilita en la próxima etapa">+ Agregar artículo</button>
+                    </div>
+
+                    <div class="alert alert-info small">La gestión de artículos (agregar, modificar y eliminar) se habilitará en la próxima etapa del proyecto.</div>
+
+                    <div id="alerta-admin" class="alert alert-danger d-none" role="alert"></div>
+
+                    <div class="card border-0 shadow-sm">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Artículo</th>
+                                        <th scope="col">Categoría</th>
+                                        <th scope="col" class="d-none d-md-table-cell">Autor</th>
+                                        <th scope="col" class="d-none d-lg-table-cell">Editorial</th>
+                                        <th scope="col" class="d-none d-md-table-cell">Año</th>
+                                        <th scope="col">Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla-articulos">
+                                    <tr><td colspan="7" class="text-center text-muted py-4">Cargando artículos...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+
+        <footer class="border-top bg-white py-3">
+            <div class="container-fluid px-4 text-muted small d-flex flex-wrap justify-content-between gap-2">
+                <span>&copy; BiblioDigital - Panel de administración</span>
+                <span>estado de api: <a href="/api/estado" target="_blank">/api/estado</a></span>
+            </div>
+        </footer>
+
+    </div>
+</body>
+</html>

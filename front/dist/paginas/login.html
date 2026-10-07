@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>B</title>
+    <title>BiblioDigital - Ingresar</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/estilos.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script defer src="../js/script.js"></script>
+    <script defer src="../js/api.js"></script>
+    <script defer src="../js/pages/login.js"></script>
 </head>
 <body class="bg-light">
 
@@ -21,14 +22,16 @@
                 <p class="text-muted small">Accede a tu cuenta</p>
             </div>
 
-            <form id="formLogin" onsubmit="return validarLogin()" novalidate>
+            <div id="alerta-login" class="alert alert-danger d-none small" role="alert"></div>
+
+            <form id="formLogin" novalidate>
                 <div class="mb-3">
                     <label for="loginEmail" class="form-label text-dark fw-medium small">Correo electrónico</label>
-                    <input type="email" class="form-control" id="loginEmail" placeholder="ejemplo@correo.com" required>
+                    <input type="email" class="form-control" id="loginEmail" placeholder="ejemplo@correo.com" required autocomplete="username">
                 </div>
                 <div class="mb-3">
                     <label for="loginPassword" class="form-label text-dark fw-medium small">Contraseña</label>
-                    <input type="password" class="form-control" id="loginPassword" placeholder="Ingresa tu contraseña" required>
+                    <input type="password" class="form-control" id="loginPassword" placeholder="Ingresa tu contraseña" required autocomplete="current-password">
                 </div>
                 
                 <button type="submit" class="btn btn-primary w-100 py-2 text-white fw-medium mt-2">Iniciar sesión</button>

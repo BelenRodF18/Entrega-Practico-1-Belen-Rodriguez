@@ -60,7 +60,9 @@ function mostrarProductos(listaAFiltrar) {
     contenedor.innerHTML = tarjetasHtml;
 }
 
-mostrarProductos(productos);
+if (contenedor) {
+    mostrarProductos(productos);
+}
 
 
 // Filtrado y colores de la interfaz
@@ -118,17 +120,6 @@ function filtrar(categoriaSeleccionada) {
 
     // Redibuja las tarjetas aplicando el filtro y el nuevo color
     mostrarProductos(resultadoFiltrado);
-}
-
-// Validación de Login
-function validarLogin() {
-    const emailInput = document.getElementById("loginEmail");
-    const passInput = document.getElementById("loginPassword");
-    if (emailInput.value === "") { alert("Escriba el correo"); return false; }
-    if (!emailInput.value.includes("@") || !emailInput.value.includes(".com")) { alert("Formato correo invalido"); return false; }
-    if (passInput.value === "") { alert("Introduzca contraseña"); return false; }
-    alert("sesion iniciada correctamente");
-    return true;
 }
 
 // Validación de Registro
