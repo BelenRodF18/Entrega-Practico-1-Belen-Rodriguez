@@ -1,6 +1,6 @@
-# Práctico 2: Base de Datos, Login y Panel de Administración (Biblioteca Virtual)
+# Prácticos 2 y 3: Biblioteca Virtual Fullstack (BiblioDigital)
 
-Continuación del Práctico 1. Sobre la misma Landing Page de BiblioDigital se agregó la base de datos, una API en PHP con MVC y un login que diferencia entre Administrador y Usuario.
+Continuación del Práctico 1. Sobre la misma Landing Page de BiblioDigital se agregó la base de datos, una API en PHP con MVC, login con roles, el dashboard del administrador con la gestión de artículos y el dashboard del usuario. El catálogo de la landing ahora se carga desde la base de datos.
 
 ##  Tecnologías y Herramientas utilizadas
 * **Diseño UI:** Figma
@@ -24,7 +24,6 @@ docker compose up -d --build
 ```
 * Landing: http://localhost:8080
 * Login: http://localhost:8080/front/dist/paginas/login.html
-* Estado de la API: http://localhost:8080/api/estado
 * phpMyAdmin: http://localhost:8081 (root / root_password)
 
 Si se modifica el `init.sql` hay que borrar el volumen con `docker compose down -v` y volver a levantar.
@@ -33,12 +32,21 @@ Si se modifica el `init.sql` hay que borrar el volumen con `docker compose down 
 * **Administrador:** admin@bibliodigital.com / admin123
 * **Usuario:** usuario@bibliodigital.com / usuario123
 
-##  Características principales
+##  Práctico 2
 * **Login:** el formulario manda el correo y la contraseña a `/api/login`. La contraseña se compara con el hash guardado en la base.
 * **Roles:** al iniciar sesión se guarda el rol del usuario en la sesión de PHP.
 * **Redirección según el rol:** el Administrador va a `dist/paginas/admin/dashboard.html` y el Usuario a `dist/paginas/user/inicio.html`.
-* **Dashboard de Administración:** muestra el usuario conectado, opción de cerrar sesión, menú del administrador, un resumen y la sección de artículos de la biblioteca.
-* **Protección:** si no hay sesión de administrador el Dashboard redirige, y las rutas `/api/admin/...` responden 401 o 403.
+* **Dashboard de Administración:** usuario conectado, cerrar sesión, menú, resumen, artículos y usuarios registrados.
+* **Dashboard de Usuario:** perfil, sus préstamos (con opción de devolver) y el catálogo para pedir artículos.
+* **Protección:** si no hay sesión o el rol no corresponde, los dashboards redirigen. Las rutas `/api/admin/...` responden 401 o 403.
+* **Sesión en la landing:** si hay sesión iniciada, la landing muestra el nombre, el acceso al panel y cerrar sesión.
+
+##  Práctico 3
+* **Agregar artículo:** desde el dashboard, con título, categoría, autor, editorial, año, descripción, imagen y disponibilidad.
+* **Modificar artículo:** el botón Editar abre el formulario con los datos cargados.
+* **Eliminar artículo:** el botón Eliminar pide confirmación y borra el artículo y sus préstamos.
+* **Catálogo dinámico:** la landing obtiene los artículos de `/api/articulos`, así que los cambios del administrador se ven en la landing.
+* Las imágenes subidas se guardan en `front/dist/assets/imagenes/`.
 
 ##  Estructura del Proyecto
 * `api/` con `index.php`, `routes.php`, `config/` y `src/` (Controllers, Models y Utils).
