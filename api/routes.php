@@ -2,6 +2,7 @@
 
 $router->get('/estado', 'EstadoController@ver');
 
+$router->post('/registro', 'AuthController@registro');
 $router->post('/login', 'AuthController@login');
 $router->get('/sesion', 'AuthController@sesion');
 $router->post('/logout', 'AuthController@logout');

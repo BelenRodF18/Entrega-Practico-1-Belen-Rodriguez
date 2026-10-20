@@ -177,6 +177,20 @@ function validarRegistro() {
     if (!emailInput.value.includes("@") || !emailInput.value.includes(".com")) { alert("El correo debe incluir @ y .com"); return false; }
     if (passValue === "") { alert("Introduzca contraseña"); return false; }
     if (passValue.length < 6) { alert("La contraseña debe tener al menos 6 caracteres"); return false; }
-    alert("registro exitoso");
-    return true;
+    registrarUsuario(nombreInput.value.trim(), emailInput.value.trim(), passValue, document.getElementById("regInteres").value);
+    return false;
+}
+
+async function registrarUsuario(nombre, email, password, idCategoria) {
+    const respuesta = await API.request("/registro", "POST", {
+        nombre: nombre,
+        email: email,
+        password: password,
+        id_categoria: idCategoria
+    });
+
+    if (respuesta.status !== "ok") { alert(respuesta.message || "No se pudo registrar"); return; }
+
+    alert("Registro exitoso, ya podés iniciar sesión");
+    window.location.href = "login.html";
 }

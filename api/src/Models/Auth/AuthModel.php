@@ -23,4 +23,24 @@ class AuthModel {
             return false;
         }
     }
+
+    public function crearUsuario($nombre, $email, $passwordHash, $idCategoria) {
+        try {
+            $stmt = $this->db->prepare(
+                "INSERT INTO USUARIOS (nombre, email, password_hash, id_rol, id_categoria_interes)
+                 SELECT :nombre, :email, :hash, id_rol, :categoria
+                 FROM ROLES
+                 WHERE nombre_rol = 'Usuario'"
+            );
+            $stmt->execute([
+                'nombre' => $nombre,
+                'email' => $email,
+                'hash' => $passwordHash,
+                'categoria' => $idCategoria
+            ]);
+            return $stmt->rowCount() === 1;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
 }
